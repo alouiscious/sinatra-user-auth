@@ -26,7 +26,7 @@ class ApplicationController < Sinatra::Base
     
     redirect '/users/home'
   end
-  
+
 
   get '/sessions/login' do
 
@@ -41,8 +41,9 @@ class ApplicationController < Sinatra::Base
     if @user
       session[:user_id] = @user.id
       redirect '/users/home'
+    else
+      redirect '/sessions/login'
     end
-    redirect '/sessions/login'
   end
 
   get '/sessions/logout' do
@@ -50,7 +51,8 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
   get '/users/home' do
-    @user = User.find(session[:user_id])
+    binding.pry
+    @user = session[:user_id]
     erb :'/users/home'
   end
 end
