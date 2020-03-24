@@ -50,9 +50,10 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect '/'
   end
+
   get '/users/home' do
-    binding.pry
-    @user = session[:user_id]
+    # binding.pry
+    @user = User.find(session[:user_id])
     erb :'/users/home'
   end
 end
